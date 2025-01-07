@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>蓝桥杯单片机学习记录-2 | 瑠衣のBlog</title><meta name="author" content="瑠衣"><meta name="copyright" content="瑠衣"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="学习了继电器和蜂鸣器的开关，以及数码管的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蓝桥杯单片机学习记录-2">
+<meta property="og:url" content="https://haixiaorui.github.io/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-2/index.html">
+<meta property="og:site_name" content="瑠衣のBlog">
+<meta property="og:description" content="学习了继电器和蜂鸣器的开关，以及数码管的使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s21.ax1x.com/2025/01/07/pE9TZ2d.jpg">
+<meta property="article:published_time" content="2025-01-07T10:17:31.000Z">
+<meta property="article:modified_time" content="2025-01-07T13:25:36.830Z">
+<meta property="article:author" content="瑠衣">
+<meta property="article:tag" content="单片机">
+<meta property="article:tag" content="51">
+<meta property="article:tag" content="蜂鸣器">
+<meta property="article:tag" content="数码管">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s21.ax1x.com/2025/01/07/pE9TZ2d.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://haixiaorui.github.io/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":"ture","highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '蓝桥杯单片机学习记录-2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/background.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s21.ax1x.com/2025/01/07/pE9TZ2d.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">瑠衣のBlog</span></a><a class="nav-page-title" href="/"><span class="site-name">蓝桥杯单片机学习记录-2</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">蓝桥杯单片机学习记录-2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-07T10:17:31.000Z" title="发表于 2025-01-07 18:17:31">2025-01-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-07T13:25:36.830Z" title="更新于 2025-01-07 21:25:36">2025-01-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A1%AC%E4%BB%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">硬件学习记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>继续蓝桥杯51开发板的学习</p>
+<p>上次学到了点亮LED灯，接下来要做的也是比较简单的一个内容，原理上和点灯差不多。</p>
+<h2 id="蜂鸣器"><a href="#蜂鸣器" class="headerlink" title="蜂鸣器"></a>蜂鸣器</h2><p>首先是控制蜂鸣器。如果将蜂鸣器的电源置为打开状态，那么在通电的那一刻蜂鸣器就会一直响的不停。而要控制蜂鸣器自然也需要先看蜂鸣器的电路图</p>
+<img src="/img/illustration/蜂鸣器.png">
+
+<p>可以看到蜂鸣器一端接<strong>VCC</strong>，始终为高电平，另一端接<strong>BUZZ</strong>，要想打开蜂鸣器，只需要将这一端置为低电平就可以了，而我们现在想要在程序一开始的时候让蜂鸣器关闭，就需要进行初始化，将这一端也置为高电平</p>
+<img src="/img/illustration/HC573U9.png">
+
+<p>可以看到<strong>BUZZ</strong>端连接到了<strong>ULN2003</strong>这个元器件上，我们现在并不知道这个元器件的作用，不过没有关系，可以在百度上搜索一下</p>
+<img src="https://bkimg.cdn.bcebos.com/pic/6a2112339daaf0b51b4cff18?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080">
+
+<p>这个元器件将每一个输入取反后再进行输出，也就是说输入给它一个低电平，它会输出一个高电平</p>
+<p>所以想让<strong>BUZZ</strong>的输入为1，就需要将对应的输入设置为0</p>
+<p>而这个输入又被一个锁存器控制，所以我们又需要先把<strong>Y5C</strong>设置为高电平才能控制联通输入和输出</p>
+<img src="/img/illustration/Y5C.png">
+
+<p>到这里就和点灯的操作没什么区别了，只不过是需要设置的引脚不同</p>
+<p>我们再来看HC138译码器的电路图</p>
+<img src="/img/illustration/74HC138.png">
+
+<p>这里还有一张它的真值表</p>
+<img src="/img/illustration/74HC138真值表.png">
+
+<p>可以看出译码器的输入和输出值完全对应着2进制到10进制的转换</p>
+<p>我们可以对上一次的代码稍加修改，使其更加方便和通用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HC138_C = <span class="number">1</span>;</span><br><span class="line">HC138_B = <span class="number">0</span>;</span><br><span class="line">HC138_A = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上一次我们用这段代码将Y4置为了低电平</p>
+<p>我们可以把各种情况包装在一起，封装成一个函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">InitHC138</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> n)</span>  <span class="comment">//这里用unsigned char应该是为了节省空间</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span>(n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:		<span class="comment">//二进制1 0 0转换为十进制为4</span></span><br><span class="line">    	  HC138_C = <span class="number">1</span>;</span><br><span class="line">		  HC138_B = <span class="number">0</span>;</span><br><span class="line">		  HC138_A = <span class="number">0</span>;</span><br><span class="line">    	<span class="keyword">break</span>;</span><br><span class="line">   	 	<span class="keyword">case</span> <span class="number">5</span>:		<span class="comment">//二进制1 0 1转换为十进制为5</span></span><br><span class="line">    	  HC138_C = <span class="number">1</span>;</span><br><span class="line">		  HC138_B = <span class="number">0</span>;</span><br><span class="line">		  HC138_A = <span class="number">1</span>;</span><br><span class="line">    	<span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//别忘了在开头重命名引脚</span></span><br></pre></td></tr></table></figure>
+
+<p>如果后面还有地方需要操作，就可以直接加在这个函数里</p>
+<p>还有一种更简便的写法，不过稍微有点难理解</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">InitHC138</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> n)</span>  <span class="comment">//这里用unsigned char应该是为了节省空间</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span>(n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:	</span><br><span class="line">    	  P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0x80</span>;</span><br><span class="line">    	<span class="keyword">break</span>;</span><br><span class="line">   	 	<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">    	  P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0xa0</span>;</span><br><span class="line">    	<span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//&amp; : 这个符号是按位与，就是将二进制的每一个位都进行与操作。 | : 这是按位或，将二进制位进行或操作</span></span><br><span class="line"><span class="comment">//P2 &amp; 0x1f : 这个的意思是将P2的每一位和0x1f，即0001 1111进行按位或，作用是把前三位清零</span></span><br><span class="line"><span class="comment">//因为前三位代表的是P2^7,P2^6和P2^5引脚</span></span><br><span class="line"><span class="comment">//0x80转换为2进制是1000 0000，进行按位或操作后就能将第一位置为1，最后CBA的输入就是1 0 0，和之前的写法得到的结果一样</span></span><br></pre></td></tr></table></figure>
+
+<p>将Y5C置为高电平后我们就可以对蜂鸣器进行操作了，<strong>BUZZ</strong>对应着<strong>P06</strong>引脚，而中间又要经过<strong>ULN2003</strong>的转换，所以要想把<strong>BUZZ</strong>置为高电平，就需要将<strong>P06</strong>引脚置为0</p>
+<p>我们可以写一个初始化函数让它在程序一开始的时候执行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">InitSysteam</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    IninHC138(<span class="number">5</span>);</span><br><span class="line">    P0 = <span class="number">0x00</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样蜂鸣器就不会一直响了。如果想让它响，那么将P0设置为0x40就可以了</p>
+<h2 id="继电器"><a href="#继电器" class="headerlink" title="继电器"></a>继电器</h2><p>继电器广泛应用在工业控制中，通过继电器对其他大电流的电器进行控制。我们先看它的电路图</p>
+<img src="/img/illustration/继电器.png">
+
+<p>可以看出它的一端也是固定接高电平，所以想触发它就需要让<strong>RELAY</strong>端接低电平，方法跟蜂鸣器没什么区别，就不多赘述了 </p>
+<h2 id="数码管"><a href="#数码管" class="headerlink" title="数码管"></a>数码管</h2><p>通过数码管可以显示数字和字母，还是首先看它的电路图</p>
+<img src="/img/illustration/数码管电路.png">
+
+<p>它有两部分组成，都有a1–dp1和com端，想要让它显示内容，就要搞明白这个线路的作用。每一块显示屏上都由8段组成，a–dp称为它的段码，想点亮其中一段，就需要把对应的线路导通，而这块开发板上的数码管是共阳极的，也就是说每一块数码管上已经有一个固定的高电平输入了，要点亮它就需要把另一个输入设为低电平</p>
+<p><strong>com</strong>端负责选择显示哪一块屏幕，作用和锁存器有点像，只有当对应的com端置为高电平时，才能显示出对应屏幕上的内容</p>
+<p>先拿第一块屏幕来举例，我们想让它显示一个数字0</p>
+<p>需要让g和dp设置为高电平，其他设置为低电平，并且com1也需要设置为高电平，我们让它显示在第一块屏幕上</p>
+<img src="/img/illustration/HC573U8.png">
+
+<p><strong>com</strong>同样连接着锁存器，套路和前面一样，这次要设置Y6C，可以把前面的函数加上一段</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">    <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">	  P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0xc0</span>;</span><br><span class="line">	  <span class="keyword">break</span>;</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+<p>然后将P0设置为0x01，就可以让第一块屏幕显示内容了</p>
+<img src="/img/illustration/HC573U7.png">
+
+<p>这是a–dp端的连接，同样是锁存器，还是一样的套路，我们的函数可以再加一段了</p>
+<p>显示数字0需要将P0设置为0xc0，这样设置好之后烧录到单片机中就会看到第一块屏幕上亮起了<strong>0</strong></p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>来实现一个功能，让数码管的每块屏幕分别从0显示到9，再让所有屏幕同时显示0到9</p>
+<p>我们先定义一个数组来存储所有数字的值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> code SMG_duanma[<span class="number">10</span>] = </span><br><span class="line">&#123;</span><br><span class="line">	<span class="number">0xc0</span>,<span class="number">0xf9</span>,<span class="number">0xa4</span>,<span class="number">0xb0</span>,<span class="number">0x99</span>,<span class="number">0x92</span>,<span class="number">0x82</span>,<span class="number">0xf8</span>,<span class="number">0x80</span>,<span class="number">0x90</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//中间的code关键字似乎能节省内存</span></span><br></pre></td></tr></table></figure>
+
+<p>然后先用一个函数来封装一下显示数码管内容的功能</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">ShowSMG</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> pos,<span class="type">unsigned</span> <span class="type">char</span> dat)</span></span><br><span class="line">&#123;</span><br><span class="line">	InitHC138(<span class="number">6</span>);		</span><br><span class="line">	P0 = <span class="number">0x01</span> &lt;&lt; pos<span class="number">-1</span>;</span><br><span class="line">	InitHC138(<span class="number">7</span>);</span><br><span class="line">	P0 = SMG_duanma[dat];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数能够实现在指定位置显示相应的内容，只需要我们传给它两个值</p>
+<p>然后再用一个函数实现所描述的功能，每块屏幕分别显示数字很明显需要两个for循环</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Show</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> i,j;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= <span class="number">8</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            ShowSMG(i,j);</span><br><span class="line">			Delay(<span class="number">1000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就实现了分别在每个数码管上显示数字的功能</p>
+<p>而要让所有数码管一起显示内容，我们需要将所有<strong>com</strong>端都置为1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">InitHC138(<span class="number">6</span>);</span><br><span class="line">P0 = <span class="number">0xff</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以用一个循环搞定</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">InitHC138(<span class="number">7</span>);</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	P0 = SMG_duanma[i];</span><br><span class="line">	Delay(<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下~</p>
+<video src="/img/illustration/数码管例子.mp4" autoplay="true" controls="controls" width="800" height="600">
+</video>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://haixiaorui.github.io">瑠衣</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://haixiaorui.github.io/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-2/">https://haixiaorui.github.io/蓝桥杯单片机学习记录-2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://haixiaorui.github.io" target="_blank">瑠衣のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a><a class="post-meta__tags" href="/tags/51/">51</a><a class="post-meta__tags" href="/tags/%E8%9C%82%E9%B8%A3%E5%99%A8/">蜂鸣器</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E7%A0%81%E7%AE%A1/">数码管</a></div><div class="post-share"><div class="social-share" data-image="https://s21.ax1x.com/2025/01/07/pE9TZ2d.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/" title="蓝桥杯单片机学习记录-1"><img class="cover" src="https://s21.ax1x.com/2025/01/07/pE9RYFA.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">蓝桥杯单片机学习记录-1</div></div><div class="info-2"><div class="info-item-1">今天学习了如何使用蓝桥杯单片机开发板点亮LED灯</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/" title="蓝桥杯单片机学习记录-1"><img class="cover" src="https://s21.ax1x.com/2025/01/07/pE9RYFA.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-07</div><div class="info-item-2">蓝桥杯单片机学习记录-1</div></div><div class="info-2"><div class="info-item-1">今天学习了如何使用蓝桥杯单片机开发板点亮LED灯</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">瑠衣</div><div class="author-info-description">随便写点什么</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%82%E9%B8%A3%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">蜂鸣器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E7%94%B5%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">继电器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%A0%81%E7%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">数码管</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">3.1.</span> <span class="toc-text">例子</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-2/" title="蓝桥杯单片机学习记录-2"><img src="https://s21.ax1x.com/2025/01/07/pE9TZ2d.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝桥杯单片机学习记录-2"/></a><div class="content"><a class="title" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-2/" title="蓝桥杯单片机学习记录-2">蓝桥杯单片机学习记录-2</a><time datetime="2025-01-07T10:17:31.000Z" title="发表于 2025-01-07 18:17:31">2025-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/" title="蓝桥杯单片机学习记录-1"><img src="https://s21.ax1x.com/2025/01/07/pE9RYFA.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝桥杯单片机学习记录-1"/></a><div class="content"><a class="title" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/" title="蓝桥杯单片机学习记录-1">蓝桥杯单片机学习记录-1</a><time datetime="2025-01-07T03:49:13.000Z" title="发表于 2025-01-07 11:49:13">2025-01-07</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://s21.ax1x.com/2025/01/07/pE9TZ2d.jpg);"><div id="footer-wrap"><div class="copyright">&copy;2025 By 瑠衣</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
