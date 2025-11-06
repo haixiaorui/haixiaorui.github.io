@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>蓝桥杯嵌入式学习记录-7 | 瑠衣のBlog</title><meta name="author" content="瑠衣"><meta name="copyright" content="瑠衣"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="学习了STM32的串口通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蓝桥杯嵌入式学习记录-7">
+<meta property="og:url" content="https://haixiaorui.github.io/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-7/index.html">
+<meta property="og:site_name" content="瑠衣のBlog">
+<meta property="og:description" content="学习了STM32的串口通信">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://haixiaorui.github.io/img/default_cover.jpg">
+<meta property="article:published_time" content="2025-10-11T06:53:24.000Z">
+<meta property="article:modified_time" content="2025-10-11T07:17:11.104Z">
+<meta property="article:author" content="瑠衣">
+<meta property="article:tag" content="STM32">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="串口">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://haixiaorui.github.io/img/default_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://haixiaorui.github.io/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-7/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":"ture","highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '蓝桥杯嵌入式学习记录-7',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/background.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">48</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/default_cover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">瑠衣のBlog</span></a><a class="nav-page-title" href="/"><span class="site-name">蓝桥杯嵌入式学习记录-7</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">蓝桥杯嵌入式学习记录-7</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-11T06:53:24.000Z" title="发表于 2025-10-11 14:53:24">2025-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-11T07:17:11.104Z" title="更新于 2025-10-11 15:17:11">2025-10-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">蓝桥杯嵌入式学习记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">356</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>终于学到最后一节，uart串口通信</p>
+<p>串口主要是用来让单片机和计算机互相之间发送和接收数据用的</p>
+<p>先来看原理图</p>
+<img src="/img/illustration/串口原理图.png">
+
+<p>我们只要知道用的哪个引脚就行了，可以看到是PA9和PA10</p>
+<p>然后用cube配置一下</p>
+<h2 id="cube配置"><a href="#cube配置" class="headerlink" title="cube配置"></a>cube配置</h2><img src="/img/illustration/串口cube配置.png">
+
+<p>在Connectivity中找到usart1，将模式改为第二个，然后根据题目要求设置波特率，一般是9600。弄好后引脚就自动设置好了，这里有一点需要注意，默认的串口引脚是PA4和PA5，如果已经使用了这两个引脚那就会自动设置为PA9和PA10，没使用的话会设置成PA4和PA5，需要我们自己改一下</p>
+<h2 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h2><h3 id="发送信息"><a href="#发送信息" class="headerlink" title="发送信息"></a>发送信息</h3><p>首先是用串口向电脑发送信息，这个比较简单，我们来到while循环里</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="type">char</span> temp[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">sprintf</span>(temp, <span class="string">&quot;frq=%d\r\n&quot;</span>, frq1);</span><br><span class="line">    HAL_UART_Transmit(&amp;huart1, (<span class="type">uint8_t</span> *)temp, <span class="built_in">strlen</span>(temp), <span class="number">50</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>前两行和lcd屏的显示差不多，格式化一下temp字符串，传入我们之前读入的频率信息</p>
+<p>然后是HAL库自带的串口发送函数，第一个参数是用的哪个串口，第二个是信息的内容，第三个是信息长度，这里用了strlen来读取，要使用这个函数需要包含<strong>string.h</strong>库，最后一个参数是超时时间</p>
+<p>效果如图</p>
+<img src="/img/illustration/串口发送效果.png">
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://haixiaorui.github.io">瑠衣</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://haixiaorui.github.io/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-7/">https://haixiaorui.github.io/蓝桥杯嵌入式学习记录-7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://haixiaorui.github.io" target="_blank">瑠衣のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/STM32/">STM32</a><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><a class="post-meta__tags" href="/tags/%E4%B8%B2%E5%8F%A3/">串口</a></div><div class="post-share"><div class="social-share" data-image="/img/default_cover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-6/" title="蓝桥杯嵌入式学习记录-6"><img class="cover" src="https://s21.ax1x.com/2025/10/09/pVH1LjI.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">蓝桥杯嵌入式学习记录-6</div></div><div class="info-2"><div class="info-item-1">学习了IIC通信和eeprom读写</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/" title="蓝桥杯嵌入式学习记录-1"><img class="cover" src="https://s21.ax1x.com/2025/09/20/pV4UeiQ.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-20</div><div class="info-item-2">蓝桥杯嵌入式学习记录-1</div></div><div class="info-2"><div class="info-item-1">学习了蓝桥杯嵌入式开发板如何点灯和LCD屏幕的显示</div></div></div></a><a class="pagination-related" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-2/" title="蓝桥杯嵌入式学习记录-2"><img class="cover" src="https://s21.ax1x.com/2025/10/01/pVTekcD.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-22</div><div class="info-item-2">蓝桥杯嵌入式学习记录-2</div></div><div class="info-2"><div class="info-item-1">学习了定时器中断和按键的使用</div></div></div></a><a class="pagination-related" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-3/" title="蓝桥杯嵌入式学习记录-3"><img class="cover" src="https://s21.ax1x.com/2025/10/07/pV7st74.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-07</div><div class="info-item-2">蓝桥杯嵌入式学习记录-3</div></div><div class="info-2"><div class="info-item-1">学习了PWM的使用</div></div></div></a><a class="pagination-related" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-4/" title="蓝桥杯嵌入式学习记录-4"><img class="cover" src="https://s21.ax1x.com/2025/10/07/pV7WYxs.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-07</div><div class="info-item-2">蓝桥杯嵌入式学习记录-4</div></div><div class="info-2"><div class="info-item-1">学习了输入捕获</div></div></div></a><a class="pagination-related" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-5/" title="蓝桥杯嵌入式学习记录-5"><img class="cover" src="https://s21.ax1x.com/2025/10/07/pV7fWlj.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-07</div><div class="info-item-2">蓝桥杯嵌入式学习记录-5</div></div><div class="info-2"><div class="info-item-1">学习了ADC模数转换的使用</div></div></div></a><a class="pagination-related" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-6/" title="蓝桥杯嵌入式学习记录-6"><img class="cover" src="https://s21.ax1x.com/2025/10/09/pVH1LjI.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-09</div><div class="info-item-2">蓝桥杯嵌入式学习记录-6</div></div><div class="info-2"><div class="info-item-1">学习了IIC通信和eeprom读写</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">瑠衣</div><div class="author-info-description">随便写点什么</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">48</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎(*^▽^*)</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#cube%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">cube配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99"><span class="toc-number">2.</span> <span class="toc-text">代码编写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E4%BF%A1%E6%81%AF"><span class="toc-number">2.1.</span> <span class="toc-text">发送信息</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-7/" title="蓝桥杯嵌入式学习记录-7"><img src="/img/default_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝桥杯嵌入式学习记录-7"/></a><div class="content"><a class="title" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-7/" title="蓝桥杯嵌入式学习记录-7">蓝桥杯嵌入式学习记录-7</a><time datetime="2025-10-11T06:53:24.000Z" title="发表于 2025-10-11 14:53:24">2025-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-6/" title="蓝桥杯嵌入式学习记录-6"><img src="https://s21.ax1x.com/2025/10/09/pVH1LjI.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝桥杯嵌入式学习记录-6"/></a><div class="content"><a class="title" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-6/" title="蓝桥杯嵌入式学习记录-6">蓝桥杯嵌入式学习记录-6</a><time datetime="2025-10-09T11:16:17.000Z" title="发表于 2025-10-09 19:16:17">2025-10-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-5/" title="蓝桥杯嵌入式学习记录-5"><img src="https://s21.ax1x.com/2025/10/07/pV7fWlj.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝桥杯嵌入式学习记录-5"/></a><div class="content"><a class="title" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-5/" title="蓝桥杯嵌入式学习记录-5">蓝桥杯嵌入式学习记录-5</a><time datetime="2025-10-07T08:31:31.000Z" title="发表于 2025-10-07 16:31:31">2025-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-4/" title="蓝桥杯嵌入式学习记录-4"><img src="https://s21.ax1x.com/2025/10/07/pV7WYxs.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝桥杯嵌入式学习记录-4"/></a><div class="content"><a class="title" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-4/" title="蓝桥杯嵌入式学习记录-4">蓝桥杯嵌入式学习记录-4</a><time datetime="2025-10-07T03:20:21.000Z" title="发表于 2025-10-07 11:20:21">2025-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-3/" title="蓝桥杯嵌入式学习记录-3"><img src="https://s21.ax1x.com/2025/10/07/pV7st74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝桥杯嵌入式学习记录-3"/></a><div class="content"><a class="title" href="/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-3/" title="蓝桥杯嵌入式学习记录-3">蓝桥杯嵌入式学习记录-3</a><time datetime="2025-10-07T02:06:13.000Z" title="发表于 2025-10-07 10:06:13">2025-10-07</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/default_cover.jpg);"><div id="footer-wrap"><div class="copyright">&copy;2025 By 瑠衣</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
